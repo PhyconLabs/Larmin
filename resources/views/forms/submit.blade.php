@@ -1,0 +1,1 @@
+{{ Form::button( $text ?: __( 'Save' ), array_merge( [ 'class' => 'btn btn-primary', 'type' => 'submit' ], $attributes ) ) }}
