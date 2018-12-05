@@ -10,19 +10,24 @@ use Intervention\Image\Facades\Image as Imagick;
 class UploadedImage
 {
     /**
-     * @var string|null
+     * @var string
      */
     protected $model;
 
     /**
-     * @var string|null
+     * @var string
      */
     protected $path;
 
     /**
-     * @var UploadedFile|null
+     * @var UploadedFile
      */
     protected $image;
+
+    /**
+     * @var string
+     */
+    protected $fieldName;
 
     /**
      * @var array
@@ -40,11 +45,12 @@ class UploadedImage
      * @param string $model
      * @param array $presets
      */
-    public function __construct( $image, $model, $presets )
+    public function __construct( $image, $fieldName, $model, $presets )
     {
         $this->image = $image;
         $this->model = $model;
         $this->presets = $presets;
+        $this->fieldName = $fieldName;
     }
 
     /**
@@ -111,7 +117,7 @@ class UploadedImage
      */
     protected function generateFileName()
     {
-        return sprintf( '%s.%s', md5( file_get_contents( $this->image->getRealPath() ) ), $this->image->getClientOriginalExtension() );
+        return sprintf( '%s_%s.%s', $this->fieldName, md5( file_get_contents( $this->image->getRealPath() ) ), $this->image->getClientOriginalExtension() );
     }
 
     /**

@@ -68,7 +68,7 @@ trait Image
      */
     protected function uploadImage( $fieldName, $image )
     {
-        $uploadedImage = ( new UploadedImage( $image, self::class, $this->imageFields[$fieldName] ) )->save();
+        $uploadedImage = ( new UploadedImage( $image, $fieldName, self::class, $this->imageFields[$fieldName] ) )->save();
 
         if( $uploadedImage->isSaved() )
         {
