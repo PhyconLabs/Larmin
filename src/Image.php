@@ -14,9 +14,13 @@ trait Image
      */
     public function setAttribute( $key, $value )
     {
-        if( array_key_exists( $key, $this->imageFields ) )
+        if( isset( $this->imageFields ) && array_key_exists( $key, $this->imageFields ) )
         {
             $this->uploadImage( $key, $value );
+        }
+        elseif( isset( $this->imageGalleryFields ) && array_key_exists( $key, $this->imageGalleryFields ) )
+        {
+            $this->uploadImageGallery( $key, $value );
         }
         else
         {
@@ -34,6 +38,11 @@ trait Image
         if( $method === 'image' )
         {
             return $this->imagePath( ...$parameters );
+        }
+
+        if( $method === 'gallery' )
+        {
+            return $this->galleryImagePaths( ...$parameters );
         }
 
         if (in_array($method, ['increment', 'decrement'])) {
@@ -63,8 +72,40 @@ trait Image
     }
 
     /**
+     * @param string $key
+     * @param string|null $preset
+     * @return array
+     */
+    protected function galleryImagePaths( $key, $preset = null )
+    {
+        $images = unserialize( $this->{$key} );
+
+        if( !$images )
+        {
+            return [];
+        }
+
+        foreach( $images as &$image )
+        {
+            if( $preset )
+            {
+                $pathInfo = pathinfo( $image );
+                $presetFilePath = sprintf( '%s/%s_%s', $pathInfo['dirname'], $preset, $pathInfo['basename'] );
+
+                $image = Storage::url( $presetFilePath );
+            }
+            else
+            {
+                $image = Storage::url( $image );
+            }
+        }
+
+        return $images;
+    }
+
+    /**
      * @param string $fieldName
-     * @param UploadedFile|null $image
+     * @param UploadedFile $image
      */
     protected function uploadImage( $fieldName, $image )
     {
@@ -78,5 +119,27 @@ trait Image
         {
             parent::setAttribute( $fieldName, null );
         }
+    }
+
+    /**
+     * @param string $fieldName
+     * @param UploadedFile[] $images
+     */
+    protected function uploadImageGallery( $fieldName, $images )
+    {
+        $request = request();
+        $existingImages = $request->get( 'existing_' . $fieldName, [] );
+
+        foreach( $images as $image )
+        {
+            $uploadedImage = ( new UploadedImage( $image, $fieldName, self::class, $this->imageGalleryFields[$fieldName] ) )->save();
+
+            if( $uploadedImage->isSaved() )
+            {
+                $existingImages[] = $uploadedImage->path();
+            }
+        }
+
+        parent::setAttribute( $fieldName, serialize( $existingImages ) );
     }
 }
