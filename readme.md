@@ -31,21 +31,6 @@ Route::post( 'login', 'Auth\LoginController@login' );
 Route::post( 'logout', 'Auth\LoginController@logout' )->name( 'logout' );
 ```
 
-Register the following form components in your AppServiceProvider boot method.
-```
-use Collective\Html\FormFacade;
-```
-```
-FormFacade::component( 'bsText', 'forms.text', [ 'name', 'label' => null, 'value' => null, 'attributes' => [] ] );
-FormFacade::component( 'bsFile', 'forms.file', [ 'name', 'value' => null, 'label' => null, 'attributes' => [] ] );
-FormFacade::component( 'bsSelect', 'forms.select', [ 'name', 'label' => null, 'value' => null, 'options' => [], 'attributes' => [] ] );
-FormFacade::component( 'bsTextarea', 'forms.textarea', [ 'name', 'label' => null, 'value' => null, 'attributes' => [] ] );
-FormFacade::component( 'bsRichtext', 'forms.richtext', [ 'name', 'label' => null, 'value' => null, 'attributes' => [] ] );
-FormFacade::component( 'bsPassword', 'forms.password', [ 'name', 'label' => null, 'attributes' => [] ] );
-FormFacade::component( 'bsCheckbox', 'forms.checkbox', [ 'name', 'label' => null, 'value' => null ] );
-FormFacade::component( 'bsSubmit', 'forms.submit', [ 'text' => null, 'attributes' => [] ] );
-```
-
 Add the following code to app/Http/Controllers/Auth/LoginController.php
 ```
 use Illuminate\Http\Request;

@@ -5,6 +5,7 @@ namespace Phycon\Larmin;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use Phycon\Larmin\Utilities\Menu\Menu;
+use Collective\Html\FormFacade as Form;
 
 class LarminServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,16 @@ class LarminServiceProvider extends ServiceProvider
         \Validator::resolver( function ( $translator, $data, $rules, $messages ) {
             return new Validator( $translator, $data, $rules, $messages );
         } );
+
+        Form::component( 'bsText', 'forms.text', [ 'name', 'label' => null, 'value' => null, 'attributes' => [] ] );
+        Form::component( 'bsFile', 'forms.file', [ 'name', 'value' => null, 'label' => null, 'attributes' => [] ] );
+        Form::component( 'bsSelect', 'forms.select', [ 'name', 'label' => null, 'value' => null, 'options' => [], 'attributes' => [] ] );
+        Form::component( 'bsTextarea', 'forms.textarea', [ 'name', 'label' => null, 'value' => null, 'attributes' => [] ] );
+        Form::component( 'bsRichtext', 'forms.richtext', [ 'name', 'label' => null, 'value' => null, 'attributes' => [] ] );
+        Form::component( 'bsPassword', 'forms.password', [ 'name', 'label' => null, 'attributes' => [] ] );
+        Form::component( 'bsCheckbox', 'forms.checkbox', [ 'name', 'label' => null, 'value' => null ] );
+        Form::component( 'bsSubmit', 'forms.submit', [ 'text' => null, 'attributes' => [] ] );
+        Form::component( 'bsImage', 'forms.image', [ 'name', 'label' => null, 'attributes' => [] ] );
     }
 
     /**
