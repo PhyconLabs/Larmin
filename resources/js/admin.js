@@ -1,6 +1,7 @@
 window.$ = window.jQuery = require('jquery');
 
 require('bootstrap');
+require('jquery-ui-bundle');
 require('jquery.scrollto');
 require('tinymce');
 require('tinymce/themes/modern/theme');

@@ -4,20 +4,26 @@
     </div>
     <div class="card-body">
         <div class="row">
-            @if( Form::getModel() && count( Form::getModel()->{$name} ) )
-                @foreach( Form::getModel()->gallery( $name ) as $image )
-                    <div class="card gallery-image col-sm-6 col-md-4 col-lg-3">
-                        <img class="card-img-top" src="{{ $image }}">
-                        <div class="card-body text-center">
-                            @isset( $attributes['multiple'] )
+            @if( Form::getModel() )
+                @isset( $attributes['multiple'] )
+                    @foreach( Form::getModel()->gallery( $name ) as $image )
+                        <div class="card gallery-image col-sm-6 col-md-4 col-lg-3">
+                            <img class="card-img-top" src="{{ $image }}">
+                            <div class="card-body text-center">
                                 <input type="hidden" name="existing_{{ $name }}[]" value="{{ $image }}">
                                 <button class="btn btn-danger remove-image" type="button">{{ __( 'Remove' ) }}</button>
-                            @else
-                                <input type="hidden" name="existing_{{ $name }}" value="{{ $image }}">
-                            @endif
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="card gallery-image col-sm-6 col-md-4 col-lg-3">
+                        <img class="card-img-top" src="{{ Form::getModel()->image( $name ) }}">
+                        <div class="card-body text-center">
+                            <input type="hidden" name="existing_{{ $name }}" value="{{ Form::getModel()->image( $name ) }}">
                         </div>
                     </div>
-                @endforeach
+                @endif
+
             @endif
         </div>
     </div>

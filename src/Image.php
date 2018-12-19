@@ -59,6 +59,11 @@ trait Image
      */
     protected function imagePath( $key, $preset = null )
     {
+        if( filter_var( $this->{$key}, FILTER_VALIDATE_URL ) )
+        {
+            return $this->{$key};
+        }
+
         if( $preset )
         {
             $path = $this->{$key};
@@ -87,6 +92,11 @@ trait Image
 
         foreach( $images as &$image )
         {
+            if( filter_var( $image, FILTER_VALIDATE_URL ) )
+            {
+                continue;
+            }
+
             if( $preset )
             {
                 $pathInfo = pathinfo( $image );

@@ -10,7 +10,7 @@ $ composer require phyconlabs/larmin
 
 Publish vendor assets.
 ``` bash
-$ php artisan vendor:publish --provider Phycon\Larmin\LarminServiceProvider
+$ php artisan vendor:publish --provider="Phycon\Larmin\LarminServiceProvider"
 ```
 
 Add service providers to provider array in `config/app.php`.
@@ -78,5 +78,5 @@ mix.js('resources/js/admin.js', 'public/js')
 
 Install npm packages.
 ```
-npm install bootstrap bootswatch @fortawesome/fontawesome-free jquery.scrollto tinymce popper.js
+npm install bootstrap bootswatch @fortawesome/fontawesome-free jquery.scrollto tinymce popper.js jquery-ui-bundle
 ```
