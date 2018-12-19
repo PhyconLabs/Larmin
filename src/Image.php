@@ -59,21 +59,21 @@ trait Image
      */
     protected function imagePath( $key, $preset = null )
     {
-        if( filter_var( $this->{$key}, FILTER_VALIDATE_URL ) )
+        if( filter_var( $this->attributes[$key], FILTER_VALIDATE_URL ) )
         {
-            return $this->{$key};
+            return $this->attributes[$key];
         }
 
         if( $preset )
         {
-            $path = $this->{$key};
+            $path = $this->attributes[$key];
             $pathInfo = pathinfo( $path );
             $presetFilePath = sprintf( '%s/%s_%s', $pathInfo['dirname'], $preset, $pathInfo['basename'] );
 
             return Storage::url( $presetFilePath );
         }
 
-        return Storage::url( $this->{$key} );
+        return Storage::url( $this->attributes[$key] );
     }
 
     /**
@@ -83,7 +83,7 @@ trait Image
      */
     protected function galleryImagePaths( $key, $preset = null )
     {
-        $images = unserialize( $this->{$key} );
+        $images = unserialize( $this->attributes[$key] );
 
         if( !$images )
         {
