@@ -60,6 +60,11 @@ class UploadedImage
     {
         try
         {
+            if( !$this->image )
+            {
+                return $this;
+            }
+
             $fileName = $this->generateFileName();
             $modelPath = $this->modelPath();
 
