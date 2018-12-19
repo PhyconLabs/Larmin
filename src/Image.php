@@ -127,7 +127,7 @@ trait Image
         }
         else
         {
-            parent::setAttribute( $fieldName, null );
+            parent::setAttribute( $fieldName, $this->getOriginal( $fieldName ) );
         }
     }
 
