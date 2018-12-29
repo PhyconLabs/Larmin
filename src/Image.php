@@ -4,6 +4,7 @@ namespace Phycon\Larmin;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Phycon\Larmin\Utilities\UploadedImage\UploadedImage;
 
 trait Image
@@ -70,10 +71,10 @@ trait Image
             $pathInfo = pathinfo( $path );
             $presetFilePath = sprintf( '%s/%s_%s', $pathInfo['dirname'], $preset, $pathInfo['basename'] );
 
-            return Storage::url( $presetFilePath );
+            return URL::to( '/' ) . Storage::url( $presetFilePath );
         }
 
-        return Storage::url( $this->attributes[$key] );
+        return URL::to( '/' ) . Storage::url( $this->attributes[$key] );
     }
 
     /**
@@ -102,11 +103,11 @@ trait Image
                 $pathInfo = pathinfo( $image );
                 $presetFilePath = sprintf( '%s/%s_%s', $pathInfo['dirname'], $preset, $pathInfo['basename'] );
 
-                $image = Storage::url( $presetFilePath );
+                $image = URL::to( '/' ) . Storage::url( $presetFilePath );
             }
             else
             {
-                $image = Storage::url( $image );
+                $image = URL::to( '/' ) . Storage::url( $image );
             }
         }
 
