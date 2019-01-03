@@ -5,7 +5,7 @@
         {{ Form::label( $label ?: $name, null, [ 'class' => 'control-label' ] ) }}
     @endif
 
-    {{ Form::select( $name, $options, $value, array_merge( [ 'class' => $errors->has( $errorKey ) ? 'form-control is-invalid' : 'form-control' ], $attributes ) ) }}
+    {{ Form::select( $name, $options, $value, array_merge( [ 'class' => $errors->has( $errorKey ) ? 'form-control is-invalid' : 'form-control' ], $attributes ), $optionAttributes ) }}
 
     @if( $errors->has( $errorKey ) )
         <span class="invalid-feedback" role="alert">{{ $errors->first( $errorKey ) }}</span>

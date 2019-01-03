@@ -33,7 +33,7 @@ class LarminServiceProvider extends ServiceProvider
 
         Form::component( 'bsText', 'forms.text', [ 'name', 'label' => null, 'value' => null, 'attributes' => [] ] );
         Form::component( 'bsFile', 'forms.file', [ 'name', 'value' => null, 'label' => null, 'attributes' => [] ] );
-        Form::component( 'bsSelect', 'forms.select', [ 'name', 'label' => null, 'value' => null, 'options' => [], 'attributes' => [] ] );
+        Form::component( 'bsSelect', 'forms.select', [ 'name', 'label' => null, 'value' => null, 'options' => [], 'attributes' => [], 'optionAttributes' => [] ] );
         Form::component( 'bsTextarea', 'forms.textarea', [ 'name', 'label' => null, 'value' => null, 'attributes' => [] ] );
         Form::component( 'bsRichtext', 'forms.richtext', [ 'name', 'label' => null, 'value' => null, 'attributes' => [] ] );
         Form::component( 'bsPassword', 'forms.password', [ 'name', 'label' => null, 'attributes' => [] ] );
