@@ -96,7 +96,13 @@ class UploadedImage
 
                 $canvas->insert( $resizedImage, 'center' )->encode( $this->image->extension() );
 
-                Storage::put( $modelPath . '/' . $presetName . '_' . $fileName, $canvas->__toString() );
+                $path = $modelPath . '/' . $presetName . '_' . $fileName;
+                Storage::put( $path, $canvas->__toString() );
+
+                if( isset( $presetOptions[2] ) && method_exists( $this->model, $presetOptions[2] ) )
+                {
+                    $this->model::{$presetOptions[2]}( Storage::disk('local')->path( $path ) );
+                }
             }
         }
         catch( FileException $exception )
