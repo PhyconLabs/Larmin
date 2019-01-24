@@ -60,6 +60,11 @@ trait Image
      */
     protected function imagePath( $key, $preset = null )
     {
+        if( !$this->attributes[$key] )
+        {
+            return null;
+        }
+
         if( filter_var( $this->attributes[$key], FILTER_VALIDATE_URL ) )
         {
             return $this->attributes[$key];
@@ -143,6 +148,12 @@ trait Image
 
         foreach( $images as $image )
         {
+            if( !is_a( $image, UploadedFile::class ) )
+            {
+                $existingImages[] = $image;
+                continue;
+            }
+
             $uploadedImage = ( new UploadedImage( $image, $fieldName, self::class, $this->imageGalleryFields[$fieldName] ) )->save();
 
             if( $uploadedImage->isSaved() )

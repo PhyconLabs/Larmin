@@ -10,18 +10,20 @@
                         <div class="card gallery-image col-sm-6 col-md-4 col-lg-3">
                             <img class="card-img-top" src="{{ $image }}">
                             <div class="card-body text-center">
-                                <input type="hidden" name="existing_{{ $name }}[]" value="{{ $image }}">
+                                <input type="hidden" name="{{ $name }}[]" value="{{ $image }}">
                                 <button class="btn btn-danger remove-image" type="button">{{ __( 'Remove' ) }}</button>
                             </div>
                         </div>
                     @endforeach
                 @else
-                    <div class="card gallery-image col-sm-6 col-md-4 col-lg-3">
-                        <img class="card-img-top" src="{{ Form::getModel()->image( $name ) }}">
-                        <div class="card-body text-center">
-                            <input type="hidden" name="existing_{{ $name }}" value="{{ Form::getModel()->image( $name ) }}">
+                    @if( Form::getModel()->image( $name ) )
+                        <div class="card gallery-image col-sm-6 col-md-4 col-lg-3">
+                            <img class="card-img-top" src="{{ Form::getModel()->image( $name ) }}">
+                            <div class="card-body text-center">
+                                <input type="hidden" name="existing_{{ $name }}" value="{{ Form::getModel()->image( $name ) }}">
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endif
 
             @endif
