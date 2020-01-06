@@ -4,6 +4,7 @@ namespace Phycon\Larmin\Utilities\Menu;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Arr;
 
 class Menu
 {
@@ -26,8 +27,8 @@ class Menu
             {
                 $menuItems[] = new MenuItem( [
                     'title' => __( $title ),
-                    'url' => route( array_get( $options, 'route' ), array_get( $options, 'routeParameters', [] ) ),
-                    'active' => self::isRouteActive( Route::is( array_get( $options, 'route' ) ), array_get( $options, 'routeParameters', [] ) )
+                    'url' => route( Arr::get( $options, 'route' ), Arr::get( $options, 'routeParameters', [] ) ),
+                    'active' => self::isRouteActive( Route::is( Arr::get( $options, 'route' ) ), Arr::get( $options, 'routeParameters', [] ) )
                 ] );
             }
         }

@@ -2,6 +2,7 @@
 
 namespace Phycon\Larmin\Utilities\Menu;
 
+use Illuminate\Support\Arr;
 
 class MenuItem
 {
@@ -26,9 +27,9 @@ class MenuItem
      */
     public function __construct( $data )
     {
-        $this->title = array_get( $data, 'title' );
-        $this->url = array_get( $data, 'url' );
-        $this->active = array_get( $data, 'active', false );
+        $this->title = Arr::get( $data, 'title' );
+        $this->url = Arr::get( $data, 'url' );
+        $this->active = Arr::get( $data, 'active', false );
     }
 
     /**
