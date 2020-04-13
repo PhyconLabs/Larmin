@@ -1,4 +1,5 @@
 # Larmin
+Larmin is now deprecated and only works with Laravel 5.1 - 5.8.
 
 ## Installation
 
